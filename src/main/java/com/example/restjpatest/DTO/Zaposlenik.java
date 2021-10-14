@@ -1,15 +1,11 @@
 package com.example.restjpatest.DTO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -22,9 +18,17 @@ public class Zaposlenik {
     @Column(name="id")
     private Long id;
 
+    //@JsonProperty mapira navedeno(puno_ime) u ime
+    //onda se u requestu mora poslati puno_ime umjesto ime
+    @JsonProperty("puno_ime")
     @Column(name = "ime")
     private String ime;
 
+    @Column(name = "prezime")
+    private String prezime;
+
+    //@JsonIgnore sakriva određeni field u responsu koji se vraća korisniku
+    @JsonIgnore
     @Column(name = "godine")
     private Long godine;
 

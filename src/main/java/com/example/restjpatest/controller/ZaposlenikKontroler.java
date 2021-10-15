@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
+//@RequestMapping("/api/v1")  da bi svi kontroleri koristili isti mapping moramo ga prebaciti u app porperties
 @RequiredArgsConstructor
 @RestController // zamjenjuje @Controler + @ResponseBody
 public class ZaposlenikKontroler {
@@ -23,7 +25,6 @@ public class ZaposlenikKontroler {
     // Ukoliko nema u app propertisima možemo pružiti default value sa : v2
     @Value("${app.version: v2}")
     private String version;
-
     @Value("${app.name}")
     private String appName;
 
@@ -31,24 +32,23 @@ public class ZaposlenikKontroler {
     public String dohvatiDetaljeAplikacije(){
         return "Aplikacija: " + appName + " Verzija: " + version;
     }
+
+
+
     //localhost:9092/context-path iz app propertiesa/zaposlenici
     @GetMapping("/zaposlenici")
     public List<Zaposlenik> dohvatiSveZaposlenike(){
-        System.out.println("Dohvaćam sve zaposlenike!");
         return zaposlenikservice.dohvatiSveZaposlenike();
     }
 
     //dohvat jednog zaposlenika pomoću path Varijable
     //localhost:9092/context-path iz app propertiesa/zaposlenik/1
     @GetMapping("/zaposlenik/{id}")
-    public String dohvatiZaposlenik(@PathVariable("id") Long id){
-        return "Dohvaćam zaposlenika sa id-jem : " + id;
+    public Optional<Zaposlenik> dohvatiZaposlenika(@PathVariable("id") Long id){
+        return zaposlenikservice.dohvatiZaposlenika(id);
     }
-    //dohvat zaposlenika pomoću requestParametara
-    @DeleteMapping("/zaposlenici")
-    public String obrisiZaposlenika(@RequestParam("id") Long id){
-        return "Brišem zaposlenika pod id-jem: " + id;
-    }
+
+
 
     @PutMapping("/zaposlenik")
     public String dodajNovogZaposlenika(@RequestParam("imeNovogZaposlenika") String ime, @RequestParam String prezime){
@@ -64,7 +64,13 @@ public class ZaposlenikKontroler {
     }
 
      @PostMapping("/zaposlenik")
-     public String spremiZaposlenika(@RequestBody Zaposlenik zaposlenik){
-        return "Spremam detalje u bazu za zaposlenika: " + zaposlenik.getIme();
+     public Zaposlenik spremiZaposlenika(@RequestBody Zaposlenik zaposlenik){
+        return zaposlenikservice.spremiZaposlenika(zaposlenik);
      }
+
+    //brisanje zaposlenika pomoću requestParametara
+    @DeleteMapping("/zaposlenik")
+    public String  obrisiZaposlenika(@RequestParam Long id){
+        return zaposlenikservice.obrisiZaposlenika(id);
+    }
 }

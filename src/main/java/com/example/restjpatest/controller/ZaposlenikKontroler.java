@@ -59,8 +59,8 @@ public class ZaposlenikKontroler {
 
     @PutMapping("/zaposlenik/{id}")
     public Zaposlenik updateZaposlenika(@PathVariable Long id, @RequestBody Zaposlenik zaposlenik){
-        System.out.println("Vršim update Zaposlenika: "  +" ID: " + id+ " Ime: " + zaposlenik.getIme());
-        return zaposlenik;
+        zaposlenik.setId(id);
+        return zaposlenikservice.azurirajZaposlenika(zaposlenik );
     }
 
      @PostMapping("/zaposlenik")

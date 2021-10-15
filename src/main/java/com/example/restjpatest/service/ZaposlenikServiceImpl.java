@@ -48,7 +48,8 @@ public class ZaposlenikServiceImpl implements ZaposlenikService{
     }
 
     @Override
-    public Zaposlenik azurirajZaposlenika(Long id) {
-        return null;
+    public Zaposlenik azurirajZaposlenika(Zaposlenik zaposlenik) {
+        System.out.println("Vršim update Zaposlenika: " + zaposlenik.getIme() + " pod id: " + zaposlenik.getId());
+        return zaposlenikRepository.save(zaposlenik);
     }
 }

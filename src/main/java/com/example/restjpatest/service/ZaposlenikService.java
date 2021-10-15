@@ -15,5 +15,5 @@ public interface ZaposlenikService {
     // obriši zaposlenika prema id-u
     String obrisiZaposlenika(Long id);
     // azuriranje zaposlenika prema id-u
-    Zaposlenik azurirajZaposlenika(Long id);
+    Zaposlenik azurirajZaposlenika(Zaposlenik zaposlenik);
 }

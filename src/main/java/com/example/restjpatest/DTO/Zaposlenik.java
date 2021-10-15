@@ -1,8 +1,10 @@
 package com.example.restjpatest.DTO;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
@@ -32,7 +34,8 @@ public class Zaposlenik {
     private String prezime;
 
     //@JsonIgnore sakriva određeni field u responsu koji se vraća korisniku
-    @JsonIgnore
+    // isto tako ga zanemaruje i prilikom updatea
+    // @JsonIgnore
     @Column(name = "godine")
     private Long godine;
 

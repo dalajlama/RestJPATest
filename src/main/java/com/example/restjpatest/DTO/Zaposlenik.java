@@ -11,6 +11,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.Objects;
@@ -35,7 +37,10 @@ public class Zaposlenik {
     // Imena kolona nisu potrebna ukoliko su imena u tablici ista kao varijabla
     @JsonProperty("puno_ime")
     // @Column(name = "ime")
-    @NotNull(message = "Ime ne smije biti prazno!")
+    // @Not null proverava samo da li je polje null ne provjerava za prazna polja ""
+    // @NotEmpty provjerava null i prazno polje
+    // @NotBlank provjerava da polje nije null, prazno ili jedan space " "
+    @NotBlank(message = "Ime ne smije biti prazno!")
     private String ime;
 
     // @Column(name = "prezime")

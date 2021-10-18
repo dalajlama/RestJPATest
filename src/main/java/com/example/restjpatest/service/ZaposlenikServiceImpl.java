@@ -3,11 +3,13 @@ package com.example.restjpatest.service;
 import com.example.restjpatest.DTO.Zaposlenik;
 import com.example.restjpatest.repository.ZaposlenikRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class ZaposlenikServiceImpl implements ZaposlenikService{
@@ -24,32 +26,32 @@ public class ZaposlenikServiceImpl implements ZaposlenikService{
 
     @Override
     public Optional<Zaposlenik> dohvatiZaposlenika(Long id) {
-        System.out.println("Dohvaćam zaposlenika  id: " + id);
+        log.info("Dohvaćam zaposlenika  id: {}",id );
         return zaposlenikRepository.findById(id);
     }
 
     @Override
     public List<Zaposlenik> dohvatiSveZaposlenike() {
-        System.out.println("Dohvati sve zaposlenike");
+        log.info("Dohvati sve zaposlenike");
         return zaposlenikRepository.findAll();
     }
 
     @Override
     public Zaposlenik spremiZaposlenika(Zaposlenik zaposlenik) {
-        System.out.println("Spremam detalje u bazu za zaposlenika: " + zaposlenik.getIme());
+        log.info("Spremam detalje u bazu za zaposlenika: {} ", zaposlenik.getIme());
         return zaposlenikRepository.save(zaposlenik);
     }
 
     @Override
     public String obrisiZaposlenika(Long id) {
-        System.out.println("Brišem zaposlenika id: " + id);
+        log.info("Brišem zaposlenika id: {} ", id);
         zaposlenikRepository.deleteById(id);
         return "Zaposlenik " + id + " obrisan!";
     }
 
     @Override
     public Zaposlenik azurirajZaposlenika(Zaposlenik zaposlenik) {
-        System.out.println("Vršim update Zaposlenika: " + zaposlenik.getIme() + " pod id: " + zaposlenik.getId());
+        log.info("Vršim update Zaposlenika: {}  pod id:  {}", zaposlenik.getIme(), zaposlenik.getId());
         return zaposlenikRepository.save(zaposlenik);
     }
 }

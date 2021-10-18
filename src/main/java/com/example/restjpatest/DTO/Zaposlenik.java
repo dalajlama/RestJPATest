@@ -10,6 +10,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.Objects;
 
@@ -33,6 +35,7 @@ public class Zaposlenik {
     // Imena kolona nisu potrebna ukoliko su imena u tablici ista kao varijabla
     @JsonProperty("puno_ime")
     // @Column(name = "ime")
+    @NotNull(message = "Ime ne smije biti prazno!")
     private String ime;
 
     // @Column(name = "prezime")
@@ -42,15 +45,19 @@ public class Zaposlenik {
     // isto tako ga zanemaruje i prilikom updatea
     // @JsonIgnore
     // @Column(name = "godine")
-    private Long godine;
+    // = 0L daje defaultnu vrijednost ukoliko nije providana
+    private Long godine = 0L;
 
     // @Column(name = "lokacija")
     private String lokacija;
 
     // @Column(name = "email")
+    @Email(message = "Uneseni mail nije validan!")
     private String email;
 
     // @Column(name = "odjel")
+    // dodatno se može dodati da se vraca custom poruka
+    @NotNull(message = "Odjel ne smije biti prazno polje!")
     private String odjel;
 
     @CreationTimestamp

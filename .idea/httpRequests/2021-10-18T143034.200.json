@@ -1,0 +1,11 @@
+{
+  "id": 9,
+  "prezime": "Marković",
+  "godine": 28,
+  "lokacija": "Osijek",
+  "email": "marko.markovic@gmail.com",
+  "odjel": "IT",
+  "createdAt": "2021-10-18T12:30:34.841+00:00",
+  "updatedAt": "2021-10-18T12:30:34.841+00:00",
+  "puno_ime": "John"
+}

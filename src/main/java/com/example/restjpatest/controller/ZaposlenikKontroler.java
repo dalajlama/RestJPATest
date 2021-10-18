@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -64,7 +65,7 @@ public class ZaposlenikKontroler {
     }
 
      @PostMapping("/zaposlenik")
-     public Zaposlenik spremiZaposlenika(@RequestBody Zaposlenik zaposlenik){
+     public Zaposlenik spremiZaposlenika(@Valid @RequestBody Zaposlenik zaposlenik){
         return zaposlenikservice.spremiZaposlenika(zaposlenik);
      }
 

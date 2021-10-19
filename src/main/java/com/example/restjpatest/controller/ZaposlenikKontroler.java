@@ -43,8 +43,8 @@ public class ZaposlenikKontroler {
     @GetMapping("/zaposlenici")
     // Ovo može bit i bez ResponseEntity pa ce vracati genericki status
     // ovako možemo kontrolirati što se vraca
-    public ResponseEntity <List<Zaposlenik>> dohvatiSveZaposlenike(){
-        return new ResponseEntity<List<Zaposlenik>>(zaposlenikservice.dohvatiSveZaposlenike(), HttpStatus.OK);
+    public ResponseEntity <List<Zaposlenik>> dohvatiSveZaposlenike(@RequestParam int pageNumber, @RequestParam int pageSize){
+        return new ResponseEntity<List<Zaposlenik>>(zaposlenikservice.dohvatiSveZaposlenike(pageNumber, pageSize), HttpStatus.OK);
     }
 
     //dohvat jednog zaposlenika pomoću path Varijable
@@ -53,7 +53,6 @@ public class ZaposlenikKontroler {
     public  ResponseEntity <Optional<Zaposlenik>> dohvatiZaposlenika(@PathVariable("id") Long id){
         return new ResponseEntity<>(zaposlenikservice.dohvatiZaposlenika(id), HttpStatus.OK) ;
     }
-
 
 
     @PutMapping("/zaposlenik")
@@ -97,6 +96,6 @@ public class ZaposlenikKontroler {
 
     @GetMapping("/zapsolenik/filterPoImenuKao")
     public ResponseEntity<List<Zaposlenik>> dohvatiZaposlenikePoImenuKao(@RequestParam String imeKao){
-        return new ResponseEntity<>(zaposlenikservice.dohvatiZaposlenikaKojemujeImeKao(imeKao), HttpStatus.OK);
+        return new ResponseEntity<>(zaposlenikservice.dohvatiZaposlenikaKojemujeImeKao("%" + imeKao + "%"), HttpStatus.OK);
     }
 }

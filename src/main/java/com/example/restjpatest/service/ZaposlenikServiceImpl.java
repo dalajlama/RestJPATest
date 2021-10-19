@@ -4,6 +4,9 @@ import com.example.restjpatest.DTO.Zaposlenik;
 import com.example.restjpatest.repository.ZaposlenikRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,9 +34,14 @@ public class ZaposlenikServiceImpl implements ZaposlenikService{
     }
 
     @Override
-    public List<Zaposlenik> dohvatiSveZaposlenike() {
-        log.info("Dohvati sve zaposlenike");
-        return zaposlenikRepository.findAll();
+    public List<Zaposlenik> dohvatiSveZaposlenike(int pageNumber, int pageSize) {
+        log.info("Dohvati sve zaposlenike po stranicama");
+        // Pageable pages = PageRequest.of(pageNumber, pageSize);
+        //moze se dodati sortiranje po nekom fieldu/stupcu
+        // Pageable pages = PageRequest.of(pageNumber, pageSize, Sort.Direction.DESC, "id");
+        // moze se dodati sortiranje i po vise fielda/stupca
+        Pageable pages = PageRequest.of(pageNumber, pageSize, Sort.Direction.DESC, "id", "ime");
+        return zaposlenikRepository.findAll(pages).getContent();
     }
 
     @Override
@@ -66,7 +74,8 @@ public class ZaposlenikServiceImpl implements ZaposlenikService{
 
     @Override
     public List<Zaposlenik> dohvatiZaposlenikaKojiUimenuImaju(String imeSadrzi) {
-        return zaposlenikRepository.findByImeContaining(imeSadrzi);
+        // implementiran i sorting mehanizam
+        return zaposlenikRepository.findByImeContaining(imeSadrzi,Sort.by(Sort.Direction.DESC, "id"));
     }
 
     @Override

@@ -8,8 +8,8 @@ import java.util.Optional;
 public interface ZaposlenikService {
     // dohvati zaposlenika prema id-u
     Optional<Zaposlenik> dohvatiZaposlenika(Long id);
-    // dohvati sve zaposlenike
-    List<Zaposlenik> dohvatiSveZaposlenike();
+    // dohvati sve zaposlenike prema broju stranice i velicini stranice
+    List<Zaposlenik> dohvatiSveZaposlenike(int pageNumber, int pageSize);
     // spremi zaposlenika u bazu
     Zaposlenik spremiZaposlenika(Zaposlenik zaposlenik);
     // obriši zaposlenika prema id-u

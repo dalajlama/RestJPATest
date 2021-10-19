@@ -54,4 +54,24 @@ public class ZaposlenikServiceImpl implements ZaposlenikService{
         log.info("Vršim update Zaposlenika: {}  pod id:  {}", zaposlenik.getIme(), zaposlenik.getId());
         return zaposlenikRepository.save(zaposlenik);
     }
+
+    @Override
+    public List<Zaposlenik> dohvatiZaposlenikaPoImenu(String ime) {
+        return zaposlenikRepository.findByIme(ime);
+    }
+    @Override
+    public List<Zaposlenik> dohvatiZaposlenikaPoImenuILokaciji(String ime, String lokacija) {
+        return zaposlenikRepository.findByImeAndLokacija(ime,lokacija);
+    }
+
+    @Override
+    public List<Zaposlenik> dohvatiZaposlenikaKojiUimenuImaju(String imeSadrzi) {
+        return zaposlenikRepository.findByImeContaining(imeSadrzi);
+    }
+
+    @Override
+    public List<Zaposlenik> dohvatiZaposlenikaKojemujeImeKao(String imeKao) {
+        return zaposlenikRepository.findByImeLike("%" + imeKao + "%");
+    }
+
 }

@@ -80,4 +80,23 @@ public class ZaposlenikKontroler {
     public ResponseEntity <String>  obrisiZaposlenika(@RequestParam Long id){
         return new ResponseEntity<>(zaposlenikservice.obrisiZaposlenika(id), HttpStatus.NO_CONTENT);
     }
+    @GetMapping("/zaposlenik/filterPoImenu")
+    public ResponseEntity<List <Zaposlenik>> dohvatiZaposlenikePoImenu(@RequestParam String ime){
+        return new ResponseEntity<>(zaposlenikservice.dohvatiZaposlenikaPoImenu(ime), HttpStatus.OK);
+    }
+
+    @GetMapping("/zapsolenik/filterPoImenuILokaciji")
+    public ResponseEntity<List<Zaposlenik>> dohvatiZaposlenikePoImenuILokaciji(@RequestParam String ime, @RequestParam String lokacija){
+        return new ResponseEntity<>(zaposlenikservice.dohvatiZaposlenikaPoImenuILokaciji(ime, lokacija), HttpStatus.OK);
+    }
+
+    @GetMapping("/zapsolenik/filterPoImenuSadrzi")
+    public ResponseEntity<List<Zaposlenik>> dohvatiZaposlenikePoImenuKojeSadrzi(@RequestParam String imeSadrzi){
+        return new ResponseEntity<>(zaposlenikservice.dohvatiZaposlenikaKojiUimenuImaju(imeSadrzi), HttpStatus.OK);
+    }
+
+    @GetMapping("/zapsolenik/filterPoImenuKao")
+    public ResponseEntity<List<Zaposlenik>> dohvatiZaposlenikePoImenuKao(@RequestParam String imeKao){
+        return new ResponseEntity<>(zaposlenikservice.dohvatiZaposlenikaKojemujeImeKao(imeKao), HttpStatus.OK);
+    }
 }

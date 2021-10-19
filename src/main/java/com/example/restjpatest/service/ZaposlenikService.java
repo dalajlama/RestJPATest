@@ -16,4 +16,12 @@ public interface ZaposlenikService {
     String obrisiZaposlenika(Long id);
     // azuriranje zaposlenika prema id-u
     Zaposlenik azurirajZaposlenika(Zaposlenik zaposlenik);
+    // Dohvacanje zaposlenika po imenu
+    List<Zaposlenik> dohvatiZaposlenikaPoImenu(String ime);
+    // Dohvacanje zaposlenika po imenu i lokaciji
+    List<Zaposlenik> dohvatiZaposlenikaPoImenuILokaciji(String ime, String lokacija);
+    // Dohvati zaposlenika koji u imenu imaju xxx
+    List<Zaposlenik> dohvatiZaposlenikaKojiUimenuImaju(String imeSadrzi);
+    // Dohvati zaposlenika kojemu je ime kao xxx
+    List<Zaposlenik> dohvatiZaposlenikaKojemujeImeKao(String imeKao);
 }

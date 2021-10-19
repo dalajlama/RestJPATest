@@ -79,6 +79,13 @@ public class ZaposlenikKontroler {
     public ResponseEntity <String>  obrisiZaposlenika(@RequestParam Long id){
         return new ResponseEntity<>(zaposlenikservice.obrisiZaposlenika(id), HttpStatus.NO_CONTENT);
     }
+
+    //brisanje zaposlenika pomoću requestParametara
+    @DeleteMapping("/obrisiZaposlenikePodImenom")
+    public ResponseEntity<String> obrisiZaposlenikePodImenom(@RequestParam String ime){
+        return new ResponseEntity<>(zaposlenikservice.obrisiZaposlenikePodImenom(ime) + " Obrisanih redaka u bazi!", HttpStatus.OK);
+    }
+
     @GetMapping("/zaposlenik/filterPoImenu")
     public ResponseEntity<List <Zaposlenik>> dohvatiZaposlenikePoImenu(@RequestParam String ime){
         return new ResponseEntity<>(zaposlenikservice.dohvatiZaposlenikaPoImenu(ime), HttpStatus.OK);
@@ -87,6 +94,13 @@ public class ZaposlenikKontroler {
     @GetMapping("/zapsolenik/filterPoImenuILokaciji")
     public ResponseEntity<List<Zaposlenik>> dohvatiZaposlenikePoImenuILokaciji(@RequestParam String ime, @RequestParam String lokacija){
         return new ResponseEntity<>(zaposlenikservice.dohvatiZaposlenikaPoImenuILokaciji(ime, lokacija), HttpStatus.OK);
+    }
+
+    @GetMapping("/zapsolenik/filterPoImenuIliLokaciji")
+    public ResponseEntity<List<Zaposlenik>> dohvatiZaposlenikePoImenuIliLokaciji(@RequestParam String ime, @RequestParam String lokacija){
+        // ako bi koristili @Pathvariable i putanju /zapsolenik/filterPoImenuIliLokaciji/{ime}/{lokacija}
+        // prilikom poziva kontrolera mora se staviti prazan space ukoliko nešto od varijabli ne stavljamo
+        return new ResponseEntity<>(zaposlenikservice.pronadjiZaposlenikaPoImenuIliLokaciji(ime, lokacija), HttpStatus.OK);
     }
 
     @GetMapping("/zapsolenik/filterPoImenuSadrzi")

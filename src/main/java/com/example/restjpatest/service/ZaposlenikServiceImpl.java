@@ -83,4 +83,16 @@ public class ZaposlenikServiceImpl implements ZaposlenikService{
         return zaposlenikRepository.findByImeLike("%" + imeKao + "%");
     }
 
+    @Override
+    public List<Zaposlenik> pronadjiZaposlenikaPoImenuIliLokaciji(String ime, String lokacija) {
+        return zaposlenikRepository.pronadjiZaposlenikaPoImenuIliLokaciji(ime, lokacija);
+    }
+
+    @Override
+    public Integer obrisiZaposlenikePodImenom(String ime) {
+        log.info("Brišem zaposlenike pod imenom {}", ime);
+        return zaposlenikRepository.obrisiZaposlenikePodImenom(ime);
+    }
+
+
 }

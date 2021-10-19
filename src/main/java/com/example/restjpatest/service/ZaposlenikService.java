@@ -24,4 +24,8 @@ public interface ZaposlenikService {
     List<Zaposlenik> dohvatiZaposlenikaKojiUimenuImaju(String imeSadrzi);
     // Dohvati zaposlenika kojemu je ime kao xxx
     List<Zaposlenik> dohvatiZaposlenikaKojemujeImeKao(String imeKao);
+    // Dohvati pomoću JPQL upita kojeg smo sami kreirali
+    List<Zaposlenik> pronadjiZaposlenikaPoImenuIliLokaciji(String ime, String lokacija);
+    // Obrisi zaposlenike pod zadanim imenom
+    Integer obrisiZaposlenikePodImenom(String ime);
 }

@@ -14,8 +14,6 @@ public interface ZaposlenikRepository extends JpaRepository<Zaposlenik, Long> {
         List<Zaposlenik> findByImeAndLokacija(String ime, String lokacija);
         // SELECT * FROM zaposlenik WHERE name LIKE "%ive%"
         List<Zaposlenik> findByImeContaining(String kaoIme);
-        // za Like se prilikom poziva repositorya moraju koristiti wildcards
-        // zaposlenikRepository.findByImeLike("%" + imeKao + "%");
-        // oduzimanjem i dodavanjem wildcarda možemo i filtrirati slično kao EndsWith i Begins Withs
+        // za Like se prilikom poziva repositorya moraju koristiti wildcards zaposlenikRepository.findByImeLike("%" + imeKao + "%"); oduzimanjem i dodavanjem wildcarda možemo i filtrirati slično kao EndsWith i Begins Withs*/
         List<Zaposlenik> findByImeLike(String kaoIme);
 }

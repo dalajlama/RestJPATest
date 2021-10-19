@@ -3,7 +3,10 @@ package com.example.restjpatest.controller;
 import com.example.restjpatest.DTO.Zaposlenik;
 import com.example.restjpatest.service.ZaposlenikService;
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.util.http.parser.HttpParser;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -38,15 +41,17 @@ public class ZaposlenikKontroler {
 
     //localhost:9092/context-path iz app propertiesa/zaposlenici
     @GetMapping("/zaposlenici")
-    public List<Zaposlenik> dohvatiSveZaposlenike(){
-        return zaposlenikservice.dohvatiSveZaposlenike();
+    // Ovo može bit i bez ResponseEntity pa ce vracati genericki status
+    // ovako možemo kontrolirati što se vraca
+    public ResponseEntity <List<Zaposlenik>> dohvatiSveZaposlenike(){
+        return new ResponseEntity<List<Zaposlenik>>(zaposlenikservice.dohvatiSveZaposlenike(), HttpStatus.OK);
     }
 
     //dohvat jednog zaposlenika pomoću path Varijable
     //localhost:9092/context-path iz app propertiesa/zaposlenik/1
     @GetMapping("/zaposlenik/{id}")
-    public Optional<Zaposlenik> dohvatiZaposlenika(@PathVariable("id") Long id){
-        return zaposlenikservice.dohvatiZaposlenika(id);
+    public  ResponseEntity <Optional<Zaposlenik>> dohvatiZaposlenika(@PathVariable("id") Long id){
+        return new ResponseEntity<>(zaposlenikservice.dohvatiZaposlenika(id), HttpStatus.OK) ;
     }
 
 
@@ -58,20 +63,21 @@ public class ZaposlenikKontroler {
         return "Doajem novog zaposlenika " +  ime + " " + prezime;
      }
 
+     //Update Zaposlenika
     @PutMapping("/zaposlenik/{id}")
-    public Zaposlenik updateZaposlenika(@PathVariable Long id, @RequestBody Zaposlenik zaposlenik){
+    public ResponseEntity <Zaposlenik> updateZaposlenika(@PathVariable Long id, @RequestBody Zaposlenik zaposlenik){
         zaposlenik.setId(id);
-        return zaposlenikservice.azurirajZaposlenika(zaposlenik );
+        return  new ResponseEntity<>(zaposlenikservice.azurirajZaposlenika(zaposlenik), HttpStatus.OK) ;
     }
-
+    // Kreiranje zaposlenika
      @PostMapping("/zaposlenik")
-     public Zaposlenik spremiZaposlenika(@Valid @RequestBody Zaposlenik zaposlenik){
-        return zaposlenikservice.spremiZaposlenika(zaposlenik);
+     public ResponseEntity <Zaposlenik> spremiZaposlenika(@Valid @RequestBody Zaposlenik zaposlenik){
+        return  new ResponseEntity<>(zaposlenikservice.spremiZaposlenika(zaposlenik), HttpStatus.CREATED);
      }
 
     //brisanje zaposlenika pomoću requestParametara
     @DeleteMapping("/zaposlenik")
-    public String  obrisiZaposlenika(@RequestParam Long id){
-        return zaposlenikservice.obrisiZaposlenika(id);
+    public ResponseEntity <String>  obrisiZaposlenika(@RequestParam Long id){
+        return new ResponseEntity<>(zaposlenikservice.obrisiZaposlenika(id), HttpStatus.NO_CONTENT);
     }
 }

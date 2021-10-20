@@ -1,9 +1,14 @@
 package com.example.restjpatest.controller;
 
+import com.example.restjpatest.DTO.Odjel;
 import com.example.restjpatest.DTO.Zaposlenik;
+import com.example.restjpatest.repository.OdjelRepository;
+import com.example.restjpatest.repository.ZaposlenikRepository;
+import com.example.restjpatest.request.ZaposlenikRequest;
 import com.example.restjpatest.service.ZaposlenikService;
 import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.http.parser.HttpParser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +24,12 @@ import java.util.Optional;
 public class ZaposlenikKontroler {
     //@Autowired
     final ZaposlenikService zaposlenikservice;
+// Privremeno preskaćemo service layer i autowiramo odjel i zaposlenik repository
+    @Autowired
+    private OdjelRepository odjelRepository;
+
+    @Autowired
+    private ZaposlenikRepository zaposlenikRepository;
 
  // Ukoliko imamo ovaj constructor nije nam potreban  @Autowired (preporučeno je)
     /* lombok @RequiredArgsConstructor on u pozadini kreira ovo dolje
@@ -70,8 +81,16 @@ public class ZaposlenikKontroler {
     }
     // Kreiranje zaposlenika
      @PostMapping("/zaposlenik")
-     public ResponseEntity <Zaposlenik> spremiZaposlenika(@Valid @RequestBody Zaposlenik zaposlenik){
-        return  new ResponseEntity<>(zaposlenikservice.spremiZaposlenika(zaposlenik), HttpStatus.CREATED);
+     public ResponseEntity <Zaposlenik> spremiZaposlenika(@Valid @RequestBody ZaposlenikRequest zaposlenikRequest){
+         Odjel odjel = new Odjel();
+         odjel.setIme_odjela(zaposlenikRequest.getOdjel_zaposlenika());
+         odjel = odjelRepository.save(odjel);
+
+         Zaposlenik zaposlenik = new Zaposlenik(zaposlenikRequest);
+         zaposlenik.setOdjel(odjel);
+         zaposlenik =  zaposlenikRepository.save(zaposlenik);
+
+        return  new ResponseEntity<>(zaposlenik, HttpStatus.CREATED);
      }
 
     //brisanje zaposlenika pomoću requestParametara

@@ -1,5 +1,6 @@
 package com.example.restjpatest.DTO;
 
+import com.example.restjpatest.request.ZaposlenikRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -46,6 +47,11 @@ public class Zaposlenik {
     // @Column(name = "prezime")
     private String prezime;
 
+    //Konstruktor
+    public Zaposlenik(ZaposlenikRequest req){
+        this.ime = req.getIme_zaposlenika();
+    }
+
     //@JsonIgnore sakriva određeni field u responsu koji se vraća korisniku
     // isto tako ga zanemaruje i prilikom updatea
     // @JsonIgnore
@@ -62,8 +68,12 @@ public class Zaposlenik {
 
     // @Column(name = "odjel")
     // dodatno se može dodati da se vraca custom poruka
-    @NotNull(message = "Odjel ne smije biti prazno polje!")
-    private String odjel;
+    //@NotNull(message = "Odjel ne smije biti prazno polje!")
+    //private String odjel;
+
+    @JoinColumn(name = "id_odjela")
+    @OneToOne
+    private Odjel odjel;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)

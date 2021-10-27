@@ -18,4 +18,6 @@ public interface ZaposlenikRepository extends PagingAndSortingRepository<Zaposle
         List<Zaposlenik> findByImeContaining(String kaoIme, Sort sort);
         // za Like se prilikom poziva repositorya moraju koristiti wildcards zaposlenikRepository.findByImeLike("%" + imeKao + "%"); oduzimanjem i dodavanjem wildcarda možemo i filtrirati slično kao EndsWith i Begins Withs*/
         List<Zaposlenik> findByImeLike(String kaoIme);
+        //
+        List<Zaposlenik> findByOdjelImeOdjela(String imeOdjela);
 }

@@ -83,7 +83,8 @@ public class ZaposlenikKontroler {
      @PostMapping("/zaposlenik")
      public ResponseEntity <Zaposlenik> spremiZaposlenika(@Valid @RequestBody ZaposlenikRequest zaposlenikRequest){
          Odjel odjel = new Odjel();
-         odjel.setIme_odjela(zaposlenikRequest.getOdjel_zaposlenika());
+         odjel.setIme(zaposlenikRequest.getOdjel_zaposlenika());
+         odjel.setImeOdjela(zaposlenikRequest.getOdjel_zaposlenika());
          odjel = odjelRepository.save(odjel);
 
          Zaposlenik zaposlenik = new Zaposlenik(zaposlenikRequest);
@@ -116,5 +117,11 @@ public class ZaposlenikKontroler {
     @GetMapping("/zapsolenik/filterPoImenuKao")
     public ResponseEntity<List<Zaposlenik>> dohvatiZaposlenikePoImenuKao(@RequestParam String imeKao){
         return new ResponseEntity<>(zaposlenikservice.dohvatiZaposlenikaKojemujeImeKao("%" + imeKao + "%"), HttpStatus.OK);
+    }
+
+    @GetMapping("/zaposlenik")
+    public ResponseEntity<List<Zaposlenik>> dohvatiZaposlenikeOdjela(@RequestParam String imeOdjela){
+        System.out.println("IME odjela  = "  + imeOdjela);
+        return new ResponseEntity<>(zaposlenikservice.dohvatiZapslenikaPremaOdjelu(imeOdjela), HttpStatus.OK);
     }
 }

@@ -83,4 +83,9 @@ public class ZaposlenikServiceImpl implements ZaposlenikService{
         return zaposlenikRepository.findByImeLike("%" + imeKao + "%");
     }
 
+    @Override
+    public List<Zaposlenik> dohvatiZapslenikaPremaOdjelu(String imeOdjela) {
+        return zaposlenikRepository.findByOdjelImeOdjela(imeOdjela);
+    }
+
 }

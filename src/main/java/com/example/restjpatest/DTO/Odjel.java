@@ -18,6 +18,8 @@ public class Odjel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String ime_odjela;
+    private String ime;
+    @Column(name = "ime_odjela")
+    private String imeOdjela;
 
 }

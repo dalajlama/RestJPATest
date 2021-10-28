@@ -2,7 +2,6 @@ package com.example.restjpatest.repository;
 
 import com.example.restjpatest.DTO.Zaposlenik;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
@@ -21,6 +20,6 @@ public interface ZaposlenikRepository extends PagingAndSortingRepository<Zaposle
         // ImeOdjela je ime varijable u Odjel klasi (String imeOdjela) a koja gleda na stupac  @Column(name = "ime_odjela")
         // Ukoliko stavimo findByOdjelIme_odjela bacilo bi grešku da ne može pronaci ime
         // jer findByOdjel znaci pronadji u tablici Odjel stupac naziva ime jer JPA gleda _ kao u javi.
-        // pa bi trazio odjel.ime.odjela
+        // pa bi trazio odjel.ime.odjela stoga moramo dati Column name za taj stupac a dodjeliti varijablu po želji
         List<Zaposlenik> findByOdjelImeOdjela(String imeOdjela);
 }

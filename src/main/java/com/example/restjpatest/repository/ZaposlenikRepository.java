@@ -1,6 +1,6 @@
 package com.example.restjpatest.repository;
 
-import com.example.restjpatest.DTO.Zaposlenik;
+import com.example.restjpatest.dto.Zaposlenik;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;

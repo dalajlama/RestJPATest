@@ -1,4 +1,4 @@
-package com.example.restjpatest.DTO;
+package com.example.restjpatest.dto;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +19,7 @@ public class Odjel {
     private Long id;
 
     private String ime;
+    // Ovdje je potreban Column name zbog findByOdjelImeOdjela iz ZaposlenikRepository
     @Column(name = "ime_odjela")
     private String imeOdjela;
 

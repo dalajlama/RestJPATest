@@ -1,6 +1,6 @@
 package com.example.restjpatest.repository;
 
-import com.example.restjpatest.DTO.Odjel;
+import com.example.restjpatest.dto.Odjel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

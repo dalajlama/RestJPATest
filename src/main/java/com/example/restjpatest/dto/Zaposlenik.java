@@ -1,26 +1,20 @@
-package com.example.restjpatest.DTO;
+package com.example.restjpatest.dto;
 
 import com.example.restjpatest.request.ZaposlenikRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-import org.hibernate.Hibernate;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
-import java.util.Objects;
 
 @Getter
 @Setter
 @ToString
+@EqualsAndHashCode
 @Entity
 @Table(name = "zaposlenik")
 @RequiredArgsConstructor
@@ -66,10 +60,12 @@ public class Zaposlenik {
     @Email(message = "Uneseni mail nije validan!")
     private String email;
 
-    // @Column(name = "odjel")
-    // dodatno se može dodati da se vraca custom poruka
-    //@NotNull(message = "Odjel ne smije biti prazno polje!")
-    //private String odjel;
+    /*
+     @Column(name = "odjel")
+     dodatno se može dodati da se vraca custom poruka
+     @NotNull(message = "Odjel ne smije biti prazno polje!")
+     private String odjel;
+    */
 
     @JoinColumn(name = "id_odjela")
     @OneToOne
@@ -82,17 +78,4 @@ public class Zaposlenik {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private Date updatedAt;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Zaposlenik that = (Zaposlenik) o;
-        return id != null && Objects.equals(id, that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return 0;
-    }
 }

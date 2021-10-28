@@ -1,13 +1,12 @@
 package com.example.restjpatest.controller;
 
-import com.example.restjpatest.DTO.Odjel;
-import com.example.restjpatest.DTO.Zaposlenik;
+import com.example.restjpatest.dto.Odjel;
+import com.example.restjpatest.dto.Zaposlenik;
 import com.example.restjpatest.repository.OdjelRepository;
 import com.example.restjpatest.repository.ZaposlenikRepository;
 import com.example.restjpatest.request.ZaposlenikRequest;
 import com.example.restjpatest.service.ZaposlenikService;
 import lombok.RequiredArgsConstructor;
-import org.apache.tomcat.util.http.parser.HttpParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -55,7 +54,7 @@ public class ZaposlenikKontroler {
     // Ovo može bit i bez ResponseEntity pa ce vracati genericki status
     // ovako možemo kontrolirati što se vraca
     public ResponseEntity <List<Zaposlenik>> dohvatiSveZaposlenike(@RequestParam int pageNumber, @RequestParam int pageSize){
-        return new ResponseEntity<List<Zaposlenik>>(zaposlenikservice.dohvatiSveZaposlenike(pageNumber, pageSize), HttpStatus.OK);
+        return new ResponseEntity<>(zaposlenikservice.dohvatiSveZaposlenike(pageNumber, pageSize), HttpStatus.OK);
     }
 
     //dohvat jednog zaposlenika pomoću path Varijable
@@ -121,7 +120,6 @@ public class ZaposlenikKontroler {
 
     @GetMapping("/zaposlenik")
     public ResponseEntity<List<Zaposlenik>> dohvatiZaposlenikeOdjela(@RequestParam String imeOdjela){
-        System.out.println("IME odjela  = "  + imeOdjela);
         return new ResponseEntity<>(zaposlenikservice.dohvatiZapslenikaPremaOdjelu(imeOdjela), HttpStatus.OK);
     }
 }

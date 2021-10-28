@@ -1,6 +1,6 @@
 package com.example.restjpatest.service;
 
-import com.example.restjpatest.DTO.Zaposlenik;
+import com.example.restjpatest.dto.Zaposlenik;
 
 import java.util.List;
 import java.util.Optional;

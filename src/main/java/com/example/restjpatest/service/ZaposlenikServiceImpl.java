@@ -1,6 +1,6 @@
 package com.example.restjpatest.service;
 
-import com.example.restjpatest.DTO.Zaposlenik;
+import com.example.restjpatest.dto.Zaposlenik;
 import com.example.restjpatest.repository.ZaposlenikRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

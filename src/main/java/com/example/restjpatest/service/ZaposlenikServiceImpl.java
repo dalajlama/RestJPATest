@@ -88,4 +88,10 @@ public class ZaposlenikServiceImpl implements ZaposlenikService{
         return zaposlenikRepository.findByOdjelImeOdjela(imeOdjela);
     }
 
+    @Override
+    public List<Zaposlenik> dohvatiZapslenikaPremaOdjeluJpql(String imeOdjela) {
+        System.out.println("ime odjela service impl = " + imeOdjela);
+        return zaposlenikRepository.dovatiZaposlenikePoImenuOdjela(imeOdjela);
+    }
+
 }

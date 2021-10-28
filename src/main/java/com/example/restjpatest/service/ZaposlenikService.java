@@ -24,6 +24,10 @@ public interface ZaposlenikService {
     List<Zaposlenik> dohvatiZaposlenikaKojiUimenuImaju(String imeSadrzi);
     // Dohvati zaposlenika kojemu je ime kao xxx
     List<Zaposlenik> dohvatiZaposlenikaKojemujeImeKao(String imeKao);
-    // Dohvati zaposlenika koji rade u određenom odjelu
+    // Dohvati zaposlenika koji rade u određenom odjelu JPA
     List<Zaposlenik> dohvatiZapslenikaPremaOdjelu(String imeOdjela);
+    //Dohvati zaposlenika koji rade u određenom odjelu JPQL
+    List<Zaposlenik> dohvatiZapslenikaPremaOdjeluJpql(String imeOdjela);
+
+
 }

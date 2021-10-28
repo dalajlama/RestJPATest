@@ -2,6 +2,7 @@ package com.example.restjpatest.repository;
 
 import com.example.restjpatest.dto.Zaposlenik;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
@@ -22,4 +23,7 @@ public interface ZaposlenikRepository extends PagingAndSortingRepository<Zaposle
         // jer findByOdjel znaci pronadji u tablici Odjel stupac naziva ime jer JPA gleda _ kao u javi.
         // pa bi trazio odjel.ime.odjela stoga moramo dati Column name za taj stupac a dodjeliti varijablu po želji
         List<Zaposlenik> findByOdjelImeOdjela(String imeOdjela);
+        // JPQL Join query in Data JPA
+        @Query("FROM Zaposlenik  WHERE  odjel.ime = :imeOdjela")
+        List<Zaposlenik> dovatiZaposlenikePoImenuOdjela (String imeOdjela);
 }

@@ -118,8 +118,16 @@ public class ZaposlenikKontroler {
         return new ResponseEntity<>(zaposlenikservice.dohvatiZaposlenikaKojemujeImeKao("%" + imeKao + "%"), HttpStatus.OK);
     }
 
+    // Dohvacanje zaposlenika prema odjelu pomocu finder metoda JPA
     @GetMapping("/zaposlenik")
     public ResponseEntity<List<Zaposlenik>> dohvatiZaposlenikeOdjela(@RequestParam String imeOdjela){
         return new ResponseEntity<>(zaposlenikservice.dohvatiZapslenikaPremaOdjelu(imeOdjela), HttpStatus.OK);
+    }
+
+    //dohvacanje zaposlenika prema odjelu pomocu JPQL-a iza jpql ne smije biti /
+    @GetMapping("/zaposlenik/jpql")
+    public ResponseEntity<List<Zaposlenik>> dohvatiZaposlenikeOdjelaJpql(@RequestParam String imeOdjela){
+        System.out.println("ime odjela controler = " + imeOdjela);
+        return new ResponseEntity<List<Zaposlenik>>(zaposlenikservice.dohvatiZapslenikaPremaOdjeluJpql(imeOdjela), HttpStatus.OK);
     }
 }

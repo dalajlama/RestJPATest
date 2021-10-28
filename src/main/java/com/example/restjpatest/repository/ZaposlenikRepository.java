@@ -18,6 +18,9 @@ public interface ZaposlenikRepository extends PagingAndSortingRepository<Zaposle
         List<Zaposlenik> findByImeContaining(String kaoIme, Sort sort);
         // za Like se prilikom poziva repositorya moraju koristiti wildcards zaposlenikRepository.findByImeLike("%" + imeKao + "%"); oduzimanjem i dodavanjem wildcarda možemo i filtrirati slično kao EndsWith i Begins Withs*/
         List<Zaposlenik> findByImeLike(String kaoIme);
-        //
+        // ImeOdjela je ime varijable u Odjel klasi (String imeOdjela) a koja gleda na stupac  @Column(name = "ime_odjela")
+        // Ukoliko stavimo findByOdjelIme_odjela bacilo bi grešku da ne može pronaci ime
+        // jer findByOdjel znaci pronadji u tablici Odjel stupac naziva ime jer JPA gleda _ kao u javi.
+        // pa bi trazio odjel.ime.odjela
         List<Zaposlenik> findByOdjelImeOdjela(String imeOdjela);
 }

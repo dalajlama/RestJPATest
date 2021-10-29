@@ -80,17 +80,19 @@ public class ZaposlenikKontroler {
     }
     // Kreiranje zaposlenika
      @PostMapping("/zaposlenik")
-     public ResponseEntity <Zaposlenik> spremiZaposlenika(@Valid @RequestBody ZaposlenikRequest zaposlenikRequest){
-         Odjel odjel = new Odjel();
-         odjel.setIme(zaposlenikRequest.getOdjel_zaposlenika());
-         odjel.setImeOdjela(zaposlenikRequest.getOdjel_zaposlenika());
-         odjel = odjelRepository.save(odjel);
+     public ResponseEntity <String> spremiZaposlenika(@Valid @RequestBody ZaposlenikRequest zaposlenikRequest){
 
-         Zaposlenik zaposlenik = new Zaposlenik(zaposlenikRequest);
-         zaposlenik.setOdjel(odjel);
-         zaposlenik =  zaposlenikRepository.save(zaposlenik);
+        Zaposlenik zaposlenik = new Zaposlenik(zaposlenikRequest);
+        zaposlenik.setIme(zaposlenikRequest.getIme_zaposlenika());
+        zaposlenikRepository.save(zaposlenik);
 
-        return  new ResponseEntity<>(zaposlenik, HttpStatus.CREATED);
+        for(String imeOdjela : zaposlenikRequest.getIme_odjela()){
+            Odjel odjel = new Odjel();
+            odjel.setIme_odjela(imeOdjela);
+            odjel.setZasposlenik(zaposlenik);
+            odjelRepository.save(odjel);
+        }
+        return new ResponseEntity<>(" Zaposlenik uspješno dodan!", HttpStatus.CREATED);
      }
 
     //brisanje zaposlenika pomoću requestParametara

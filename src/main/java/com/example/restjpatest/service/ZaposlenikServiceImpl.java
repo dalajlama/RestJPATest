@@ -65,33 +65,39 @@ public class ZaposlenikServiceImpl implements ZaposlenikService{
 
     @Override
     public List<Zaposlenik> dohvatiZaposlenikaPoImenu(String ime) {
-        return zaposlenikRepository.findByIme(ime);
+       // return zaposlenikRepository.findByIme(ime);
+        return null;
     }
     @Override
     public List<Zaposlenik> dohvatiZaposlenikaPoImenuILokaciji(String ime, String lokacija) {
-        return zaposlenikRepository.findByImeAndLokacija(ime,lokacija);
+       // return zaposlenikRepository.findByImeAndLokacija(ime,lokacija);
+        return null;
     }
 
     @Override
     public List<Zaposlenik> dohvatiZaposlenikaKojiUimenuImaju(String imeSadrzi) {
         // implementiran i sorting mehanizam
-        return zaposlenikRepository.findByImeContaining(imeSadrzi,Sort.by(Sort.Direction.DESC, "id"));
+        //return zaposlenikRepository.findByImeContaining(imeSadrzi,Sort.by(Sort.Direction.DESC, "id"));
+        return null;
     }
 
     @Override
     public List<Zaposlenik> dohvatiZaposlenikaKojemujeImeKao(String imeKao) {
-        return zaposlenikRepository.findByImeLike("%" + imeKao + "%");
+        //return zaposlenikRepository.findByImeLike("%" + imeKao + "%");
+        return null;
     }
 
     @Override
     public List<Zaposlenik> dohvatiZapslenikaPremaOdjelu(String imeOdjela) {
-        return zaposlenikRepository.findByOdjelImeOdjela(imeOdjela);
+        //return zaposlenikRepository.findByOdjelImeOdjela(imeOdjela);
+        return null;
     }
 
     @Override
     public List<Zaposlenik> dohvatiZapslenikaPremaOdjeluJpql(String imeOdjela) {
         System.out.println("ime odjela service impl = " + imeOdjela);
-        return zaposlenikRepository.dovatiZaposlenikePoImenuOdjela(imeOdjela);
+        //return zaposlenikRepository.dovatiZaposlenikePoImenuOdjela(imeOdjela);
+        return null;
     }
 
 }

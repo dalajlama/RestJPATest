@@ -18,9 +18,10 @@ public class Odjel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String ime;
-    // Ovdje je potreban Column name zbog findByOdjelImeOdjela iz ZaposlenikRepository
-    @Column(name = "ime_odjela")
-    private String imeOdjela;
+    private String ime_odjela;
+
+    @ManyToOne
+    @JoinColumn(name ="zaposlenik_id")
+    private Zaposlenik zasposlenik;
 
 }
